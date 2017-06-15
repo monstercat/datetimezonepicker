@@ -1,0 +1,11 @@
+{
+  "name": "datetimezonepicker",
+  "version": "1.0.0",
+  "description": "HTML, JS, CSS for making a date + time + timezone picker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
