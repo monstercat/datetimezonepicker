@@ -35,12 +35,13 @@ There are **4** javascript files to include.
 ```
 
 ## Register the Handlebars Partials
-This code appends a handlebar partial to the body. Your code needs to find that partial and register it. In existing projects that is already happening in the main.js file like so
+This datetimezonepicker.js file appends a handlebar partial in HTML form to the `body`. Your code needs to find that partial and register it with Handlebars. In existing projects like Iris and the Event Manager, that is already happening in the main.js file like so
 
 ```
 document.addEventListener('DOMContentLoaded', function () {
     registerPartials();
 });
+```
 
 ## Invoke the Helper
 Here's how to create the HTML. It takes in two parameters
@@ -61,3 +62,6 @@ Here's how to create the HTML. It takes in two parameters
 Add this function call to a post-render callback or function.
 
 `hookDateTimeZoneFields()`
+
+# Timezones
+Changing the timezone field will change the values shown to the user and convert it to the match, but will not change the GMT datetime entered. There are currently only three timezones listed but more can be added.
