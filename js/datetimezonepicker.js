@@ -16,7 +16,6 @@ function hookDateTimeZoneFields (node, opts) {
     var isoInput = $el.find('input[role=iso-date]');
     var date = new Date(isoInput.val());
     var mdate;
-        console.log('date.toString()', date.toString());
     if(date.toString() == 'Invalid Date') {
       mdate = moment(new Date()).tz(selectedTimezone);
     }
@@ -69,7 +68,6 @@ function hookDateTimeZoneFields (node, opts) {
         timeInput.val('');
       }
       else {
-        console.log('mdate format', mdate.format('YYYY-MM-DD'));
         dateInput.val(mdate.format('YYYY-MM-DD'));
         timeInput.val(mdate.format('HH:mm'));
       }
@@ -78,7 +76,6 @@ function hookDateTimeZoneFields (node, opts) {
 
     //dateInput.value = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
     dateInput.on('change', function () {
-      console.log('dateinput thing');
       updateDate();
     });
     timeInput.on('change keyup', function (e) {
@@ -96,7 +93,6 @@ function hookDateTimeZoneFields (node, opts) {
       //and we just want to update the display without actually changing the data
       if(timeInput.ignoreChange) {
         timeInput.ignoreChange = false;
-        console.log('ignored');
         return
       }
       updateDate();
