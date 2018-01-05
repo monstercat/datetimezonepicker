@@ -17,7 +17,7 @@ function hookDateTimeZoneFields (node, opts) {
     var date = new Date(isoInput.val());
     var mdate;
     if(date.toString() == 'Invalid Date') {
-      mdate = moment(new Date()).tz(selectedTimezone);
+      mdate = false;
     }
     else {
       mdate = moment(date).tz(selectedTimezone);
@@ -32,6 +32,10 @@ function hookDateTimeZoneFields (node, opts) {
 
       //Update based on the date picker
       if(dateVal) {
+        if(!mdate) {
+          mdate = moment(new Date()).tz(selectedTimezone);
+        }
+
         var parts = dateVal.split(/[\-|\/]/);
         if(parts.length == 3) {
           mdate.year(parts[0]);
@@ -66,20 +70,25 @@ function hookDateTimeZoneFields (node, opts) {
 
     var updateInputs = function () {
       //Update the view to match the date passed in to the handlebars helper
-      if(mdate.format() == 'Invalid date') {
+      if(!mdate || mdate.format() == 'Invalid date') {
         dateInput.val('');
         timeInput.val('');
       }
       else {
         dateInput.val(mdate.format('YYYY-MM-DD'));
-        timeInput.val(mdate.format('HH:mm'));
+        updateTimeInput();
       }
       timeInput.ignoreChange = true
-     }
+    }
+
+    var updateTimeInput = function () {
+      timeInput.val(mdate.format('HH:mm'));
+    }
 
     //dateInput.value = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
     dateInput.on('change', function () {
       updateDate();
+      updateTimeInput();
     });
     timeInput.on('change keyup', function (e) {
       var val = $(this).val();
@@ -103,7 +112,6 @@ function hookDateTimeZoneFields (node, opts) {
     zoneSelect.on('change', function (e) {
       selectedTimezone = zoneSelect.val();
       mdate = mdate.clone().tz(selectedTimezone); //Convert the moment date to the new timezone
-      //updateDate();
       updateInputs();
     });
     $(dateInput).datepicker({
