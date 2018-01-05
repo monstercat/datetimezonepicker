@@ -1,6 +1,6 @@
 {
   "name": "datetimezonepicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HTML, JS, CSS for making a date + time + timezone picker.",
   "main": "index.js",
   "scripts": {
