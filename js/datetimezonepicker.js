@@ -38,27 +38,30 @@ function hookDateTimeZoneFields (node, opts) {
           mdate.month(parseInt(parts[1]) - 1); //Months are 0 to 11 index
           mdate.date(parts[2]);
         }
-      }
 
-      if(times) {
-        var split = times.split(':');
-        if(split.length > 0) {
-          split[0] = split[0] || 0;
-          mdate.hour(parseInt(split[0]));
-          if(split.length > 1) {
-            mdate.minute(parseInt(split[1]));
+        if(times) {
+          var split = times.split(':');
+          if(split.length > 0) {
+            split[0] = split[0] || 0;
+            mdate.hour(parseInt(split[0]));
+            if(split.length > 1) {
+              mdate.minute(parseInt(split[1]));
+            }
+          }
+          else {
+            mdate.hour(0);
           }
         }
         else {
           mdate.hour(0);
         }
+        isoInput.val(mdate.toISOString());
+        $help.text(mdate.clone().tz(defaultTimezone).format('ddd MMM Do YYYY h:mm A z'));
       }
       else {
-        mdate.hour(0);
+        isoInput.val('');
+        $help.text('No date');
       }
-
-      isoInput.val(mdate.toISOString());
-      $help.text(mdate.clone().tz(defaultTimezone).format('ddd MMM Do YYYY h:mm A z'));
     }
 
     var updateInputs = function () {
@@ -81,7 +84,7 @@ function hookDateTimeZoneFields (node, opts) {
     timeInput.on('change keyup', function (e) {
       var val = $(this).val();
       var replaced = val.replace(/[^0-9:]/g, '');
-      
+
       if(val != replaced) {
         var start = this.selectionStart;
         var end = this.selectionEnd;
