@@ -82,7 +82,12 @@ function hookDateTimeZoneFields (node, opts) {
     }
 
     var updateTimeInput = function () {
-      timeInput.val(mdate.format('HH:mm'));
+      if (!timeInput.val()) {
+        timeInput.val('00:00');
+      }
+      else {
+        timeInput.val(mdate.format('HH:mm'));
+      }
     }
 
     //dateInput.value = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
