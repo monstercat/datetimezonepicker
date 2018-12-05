@@ -60,5 +60,6 @@
 
 .form-inline.date-time-zone-picker .form-help {
   line-height: 40px;
+  width: 100%;
   margin-left: 3px;
 }

@@ -66,7 +66,7 @@ function hookDateTimeZoneFields (node, opts) {
       selectedTimezone = 'Europe/London'
     }
 
-    var mdate  = moment(isoInput).clone().tz(selectedTimezone)
+    var mdate  = moment.tz(isoVal, selectedTimezone)
 
 
     //Load up the initial values of the
@@ -107,8 +107,8 @@ function hookDateTimeZoneFields (node, opts) {
           }
         }
 
-        const isostring = mdate.toISOString()
         mdate = moment.tz(dateTimeStr, timeZone)
+        const isostring = mdate.toISOString()
         isoInput.val(isostring)
         $help.text(mdate.clone().tz(defaultTimezone).format('ddd MMM Do YYYY h:mm A z'));
       }
